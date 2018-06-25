@@ -1,0 +1,104 @@
+function getRandomInt(max) {
+  return Math.floor(Math.random() * Math.floor(max));
+}
+
+function rollD6() {
+    var rawResult = getRandomInt(6);
+   return rawResult + 1;
+}
+
+function rollMultipleD6(numToRoll) {
+    var results = [];
+    for (i = 0; i < numToRoll; i++)
+    {
+        results.push(rollD6());
+    }
+    return results;
+}
+
+function calculateHits(resultArray) {
+
+    var hits = 0;
+    var glitches = 0;
+    for (i = 0; i < resultArray.length; i++)
+    {
+        if (resultArray[i] === 5 || resultArray[i] === 6)
+        {
+            hits++;
+        }
+        else if (resultArray[i] === 1)
+        {
+            glitches++;
+        }
+    }
+
+    var results = [];
+
+    results.push(resultArray.length);
+    results.push(hits);
+    results.push(glitches);
+    results.push(resultArray);
+    
+    return results;
+}
+
+//returns a two-element array, first element indicated whether test succeeded (0 or 1)
+//second element indicates any glitch (0 = none, 1 = glitch, 2 = critical glitch)
+function thresholdTest(numD6, numHitsReq) {
+
+    var rawResults = rollMultipleD6(numD6);
+    var hitsAndGlitches = calculateHits(rawResults);
+    var results = [];
+
+    if (hitsAndGlitches[1] >= numHitsReq){
+
+        //successful test
+        results.push(1);
+    }  
+    else {
+        //failed test
+        results.push(0);
+    }
+
+    if (hitsAndGlitches[1] == 0 && (hitsAndGlitches[2] > (numD6 / 2))) {
+
+        //critical glitch
+        results.push(2);
+    }
+    else if (hitsAndGlitches[2] > (numD6 / 2)) {
+
+        //glitch
+        results.push(1);
+    }
+    else {
+        results.push(0);
+    }
+    
+    return results;
+}
+
+function opposedTest(numD6Pc, numD6Npc){
+   
+    var rawResultsPc = rollMultipleD6(numD6Pc);
+    var hitsAndGlitchesPc = calculateHits(rawResultsPc);
+    var rawResultsNpc = rollMultipleD6(numD6Npc);
+    var hitsAndGlitchesNpc = calculateHits(rawResultsNpc);
+
+    //if net result is positive, PC won and the number is net hits, if negative, npc won
+    var netResult = hitsAndGlitchesPc[1] - hitsAndGlitchesNpc[1];
+
+    //check if PC glitched
+    var glitchPc = 0;
+    if (hitsAndGlitchesPc[2] >= (numD6Pc / 2)) glitchPc = 1;
+    if (hitsAndGlitchesPc[2] >= (numD6Pc / 2) && (hitsAndGlitchesPc[1] === 0)) glitchPc = 2;
+
+    //check if NPC glitched
+    var glitchNpc = 0;
+    if (hitsAndGlitchesNpc[2] >= (numD6Npc / 2)) glitchNpc = 1;
+    if (hitsAndGlitchesNpc[2] >= (numD6Npc / 2) && (hitsAndGlitchesNpc[1] === 0)) glitchNpc = 2;
+
+    var results = [];
+    results.push(netResult);
+    results.push(glitchPc);
+    results.push(glitchNpc);
+}
