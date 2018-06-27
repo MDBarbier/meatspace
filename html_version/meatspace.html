@@ -16,6 +16,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
 
 
+        <script src="scripts/localStorage.js"></script>
 	</head>
 
 	<body>
@@ -83,13 +84,23 @@
                 <script src="scripts\handlers.js"></script>
                 <script src="scripts\TestCalculator.js"></script>
                 
+                <script>
+                    var localStoragrResult = setLocalStorage("test", "Hello chummer!");
+                    var retrievedMessage = getLocalStorage("test");                    
+                    if (!localStoragrResult){
+                        console.log("Local storage is disabled, some features will not work!");
+                    }
+                    else {
+                        console.log("Local storage is working correctly. Message retrieved: " + retrievedMessage);
+                    }
+                </script>
                 
 			</div>
 
             <div>
 			    <br />
                 <hr>
-                <p>This website is not for profit. No Shadowrun copyrights or trademarks owned by the webmaster, <a href="http://www.shadowruntabletop.com/">Catalyst Game Labs</a> own all copyrights. Email matthew-7.7 at hotmail dot com for questions.
+                <p>This tool is not for profit. No Shadowrun copyrights or trademarks owned by the developer, <a href="http://www.shadowruntabletop.com/">Catalyst Game Labs</a> own all copyrights. Email matthew-7.7 at hotmail dot com for questions.
             </div>
         </div>		
 
