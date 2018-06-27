@@ -70,15 +70,46 @@ function skillCheck(stat1, stat2, modifiers, threshold) {
     return results;
 }
 
-function initiativeRoll(bonus) {
+function initiativeRoll(bonus, dice) {
 
-    var d6 = rollD6();
-    var initiative = parseInt(d6) + parseInt(bonus);
+    var rolls = rollMultipleD6(parseInt(dice));
+    var cumulativeScore = 0;
+    for (i=0;i<rolls.length;i++)
+    {
+        cumulativeScore += rolls[i];
+    }
+
+    var initiative = parseInt(cumulativeScore) + parseInt(bonus);
 
     var results = [];
 
     results.push(initiative);
-    results.push(d6);
+    results.push(rolls);    
+    
+    return results;
+}
+
+function calculateDamage(netHits, dv, damageType, defenderAv, defenderBody, ap) {
+    var modifiedDv = parseInt(dv) + parseInt(netHits);
+    var modifiedAv = parseInt(defenderAv) + parseInt(defenderBody);
+    var modifiedDamageType = damageType;
+    var modifiedDicePool = modifiedAv - parseInt(ap);
+
+    if (modifiedDv < modifiedAv)
+    {
+        modifiedDamageType = "Stun";
+    }
+
+    var rawRolls = rollMultipleD6(modifiedDicePool);
+    var hits = calculateHits(rawRolls);
+    var resistRollSuccesses = hits[1];
+
+    var damageDone = modifiedDv - resistRollSuccesses;
+
+    var results = [];
+
+    results.push(damageDone);
+    results.push(modifiedDamageType);
     
     return results;
 }

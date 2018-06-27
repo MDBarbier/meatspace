@@ -41,8 +41,26 @@ function skillCheckHandler() {
 function initiativeHandler()
 {
     var bonus = $('#initiative_bonus').val();
+    var dice = $('#initiative_dice').val();
 
-    var results = initiativeRoll(bonus);
+    var results = initiativeRoll(bonus, dice);
 
     $('#initiativeResult').val('Initiative: ' + results[0] + ' (' + results[1] + '+' + bonus + ')');
+}
+
+function calcDamageHandler() {
+
+    var netHits = $('#netHits').val();
+    var dv = $('#dv').val();
+    var ap = $('#ap').val();
+    var damageType = $('#damageType').val();
+    var defenderAv = $('#defenderAv').val();
+    var defenderBody = $('#defenderBody').val();
+
+    var results = calculateDamage(netHits, dv, damageType, defenderAv, defenderBody, ap);
+
+    var output = "Damage type: " + results[1] + ", Damage done: " + results[0];
+
+    $('#damageResult').val(output);
+    
 }

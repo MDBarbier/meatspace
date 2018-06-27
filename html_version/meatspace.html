@@ -27,11 +27,9 @@
 			</div>
 
 			<button data-toggle="collapse" data-target="#dicetools" class="btn btn-default">Toggle Dice Tools</button>
-			
+            <button data-toggle="collapse" data-target="#skilltools" class="btn btn-default">Toggle Skill Tools</button>
+            
 			<div id="dicetools" class="collapse">
-                
-                
-
                     <div class="row">
                         <div class="col-md-12">
                             <div class="well voffset2">
@@ -53,12 +51,17 @@
                             </div>
                         </div>
                     </div>
-                
+            </div>
+            
+
+            <div id="skilltools" class="collapse">
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="well voffset2">
                                 <p>Calculate initiative:</p>                
                                 <input id="initiative_bonus" placeholder="Enter the initiative bonus here" class="form-control voffset1" />
+                                <input id="initiative_dice" placeholder="Enter the no of initiative d6" class="form-control voffset1" />
                                 <input id="initiativeResult" placeholder="results will show here" class="form-control voffset1" />
                                 <input type="button" onclick="initiativeHandler()" value="Calculate initiative" class="btn btn-primary voffset1" />         
                             </div>
@@ -76,10 +79,29 @@
                                 <input id="skillCheckResult" placeholder="results will show here" class="form-control voffset1" />
                                 <input type="button" onclick="skillCheckHandler()" value="GO" class="btn btn-primary voffset1" />         
                             </div>
+                        </div>
                     </div>
 
-                   
-                </div>
+                    <div class="row">
+                            <div class="col-md-12">
+                                <div class="well voffset2">
+                                    <p>Calculate damage:</p>                
+                                    <input id="netHits" placeholder="Enter the net successes from attack roll here" class="form-control voffset1" />
+                                    <input id="dv" placeholder="Enter the DV of the weapon here" class="form-control voffset1" />
+                                    <input id="ap" placeholder="Enter the AP of the weapon here" class="form-control voffset1" />
+                                    <select id="damageType" class="form-control voffset1">
+                                        <option selected>Physical</option>
+                                        <option>Stun</option>
+                                    </select>
+                                    <input id="defenderAv" placeholder="Enter the AV of the defender" class="form-control voffset1" />
+                                    <input id="defenderBody" placeholder="Enter the Body attribute of the defender" class="form-control voffset1" />
+                                    <input id="damageResult" placeholder="results will show here" class="form-control voffset1" />
+                                    <input type="button" onclick="calcDamageHandler()" value="Calculate damage" class="btn btn-primary voffset1" />         
+                                </div>
+                            </div>  
+                    </div>
+                
+            
 
                 <script src="scripts\handlers.js"></script>
                 <script src="scripts\TestCalculator.js"></script>
