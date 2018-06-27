@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+
+		<!-- Site CSS -->
+		<link rel="stylesheet" type="text/css" href="content/meatspace.css"/>
+
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+		<!-- Bootstrap -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+		<!-- Popper JS -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+
+
+	</head>
+
+	<body>
+
+		<div class="container">
+			<div class="jumbotron voffset2">
+				<h1>Hello chummer, welcome to meatspace</h1>
+			</div>
+
+			<button data-toggle="collapse" data-target="#dicetools" class="btn btn-default">Toggle Dice Tools</button>
+			
+			<div id="dicetools" class="collapse">
+                
+                
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="well voffset2">
+                            <p>Roll some D6:</p>
+                            <input id="source" placeholder="enter the number to roll here" class="form-control">
+                            <input id="result" placeholder="results will show here" class="form-control voffset1">
+                            <input type="button" value="roll" onclick="clickHandler()" class="btn btn-primary voffset1" style="width:100px;" />
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="well voffset2">
+                            <p>Roll some D6 and get number of hits (5s and 6s) and misses (1s):</p>
+                            <input id="sourceHitInfo" placeholder="enter the number to roll here" class="form-control">
+                            <input id="resultHitInfo" placeholder="results will show here" class="form-control voffset1">
+                            <input type="button" value="roll" onclick="hitHandler()" class="btn btn-primary voffset1" style="width:100px;" />
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="well voffset2">
+                                <p>Calculate initiative:</p>                
+                                <input id="initiative_bonus" placeholder="Enter the initiative bonus here" class="form-control voffset1" />
+                                <input id="initiativeResult" placeholder="results will show here" class="form-control voffset1" />
+                                <input type="button" onclick="initiativeHandler()" value="Calculate initiative" class="btn btn-primary voffset1" />         
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="well voffset2">
+                                <p>Do a skill check:</p>                
+                                <input id="stat1" placeholder="Enter the Attribute here" class="form-control voffset1" />
+                                <input id="stat2" placeholder="Enter the Skill (or 2nd Attribute) here" class="form-control voffset1" />
+                                <input id="modifiers" placeholder="Enter sum total of modifiers to apply" class="form-control voffset1" />
+                                <input id="threshold" placeholder="Enter threshold" class="form-control voffset1" />
+                                <input id="skillCheckResult" placeholder="results will show here" class="form-control voffset1" />
+                                <input type="button" onclick="skillCheckHandler()" value="GO" class="btn btn-primary voffset1" />         
+                            </div>
+                    </div>
+
+                   
+                </div>
+
+                <script src="scripts\handlers.js"></script>
+                <script src="scripts\TestCalculator.js"></script>
+                
+                
+			</div>
+
+            <div>
+			    <br />
+                <hr>
+                <p>This website is not for profit. No Shadowrun copyrights or trademarks owned by the webmaster, <a href="http://www.shadowruntabletop.com/">Catalyst Game Labs</a> own all copyrights. Email matthew-7.7 at hotmail dot com for questions.
+            </div>
+        </div>		
+
+	</body>
+
+</html>
